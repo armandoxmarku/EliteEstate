@@ -1,0 +1,240 @@
+@model Agent
+
+<div class="row d-flex justify-content-center ">
+    <form asp-action="RegisterAgentForm" class="glass-effect-login col-8" enctype="multipart/form-data">
+
+        <div class="d-flex justify-content-between">
+            @* First Name *@
+            <div class=" w-48">
+                <div class="login-and-register-form-inputs">
+                    <input asp-for="Name" required="" class="form-control w-100 shadow-sm" id="FirstName"
+                        placeholder="Enter First Name">
+                    <label>
+                        <span style="transition-delay:0ms">E</span>
+                        <span style="transition-delay:50ms">n</span>
+                        <span style="transition-delay:100ms">t</span>
+                        <span style="transition-delay:150ms">e</span>
+                        <span style="transition-delay:200ms">r</span>
+                        <span style="transition-delay:250ms"></span>
+                        <span style="transition-delay:250ms">F</span>
+                        <span style="transition-delay:300ms">i</span>
+                        <span style="transition-delay:350ms">r</span>
+                        <span style="transition-delay:400ms">s</span>
+                        <span style="transition-delay:450ms">t</span>
+                        <span style="transition-delay:500ms"></span>
+                        <span style="transition-delay:500ms">N</span>
+                        <span style="transition-delay:550ms">a</span>
+                        <span style="transition-delay:600ms">m</span>
+                        <span style="transition-delay:650ms">e</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-start">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </span>
+            </div>
+
+            @* Last Name *@
+            <div class=" w-48">
+                <div class="login-and-register-form-inputs">
+                    <input asp-for="LastName" required="" class="form-control w-100 shadow-sm" id="LastName"
+                        placeholder="Enter Last Name">
+                    <label>
+                        <span style="transition-delay:0ms">E</span>
+                        <span style="transition-delay:50ms">n</span>
+                        <span style="transition-delay:100ms">t</span>
+                        <span style="transition-delay:150ms">e</span>
+                        <span style="transition-delay:200ms">r</span>
+                        <span style="transition-delay:250ms"></span>
+                        <span style="transition-delay:250ms">L</span>
+                        <span style="transition-delay:300ms">a</span>
+                        <span style="transition-delay:350ms">s</span>
+                        <span style="transition-delay:400ms">t</span>
+                        <span style="transition-delay:450ms"></span>
+                        <span style="transition-delay:450ms">N</span>
+                        <span style="transition-delay:500ms">a</span>
+                        <span style="transition-delay:550ms">m</span>
+                        <span style="transition-delay:600ms">e</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-start">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </span>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <div class="w-55">
+
+                <div>
+                    <div class="login-and-register-form-inputs">
+                        <input asp-for="Phone" required class="form-control w-100 shadow-sm" id="PropertyName"
+                            placeholder="Property Name">
+                        <label>
+                            <span style="transition-delay:0ms">P</span>
+                            <span style="transition-delay:50ms">h</span>
+                            <span style="transition-delay:100ms">o</span>
+                            <span style="transition-delay:150ms">n</span>
+                            <span style="transition-delay:200ms">e</span>
+                        </label>
+                    </div>
+                    <span class="d-flex justify-content-start">
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </span>
+                </div>
+
+                <!-- Location -->
+                <div>
+                    <div class="login-and-register-form-inputs">
+                        <input asp-for="Address" required class="form-control w-100 shadow-sm" id="Location"
+                            placeholder="Location">
+                        <label>
+                            <span style="transition-delay:0ms">A</span>
+                            <span style="transition-delay:50ms">d</span>
+                            <span style="transition-delay:100ms">d</span>
+                            <span style="transition-delay:150ms">r</span>
+                            <span style="transition-delay:200ms">e</span>
+                            <span style="transition-delay:250ms">s</span>
+                            <span style="transition-delay:300ms">s</span>
+                        </label>
+                    </div>
+                    <span class="d-flex justify-content-start">
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </span>
+                </div>
+
+                <!-- Price -->
+                <div>
+                    <div class="login-and-register-form-inputs">
+                        <input asp-for="Bio" required class="form-control w-100 shadow-sm" id="Price"
+                            placeholder="Price">
+                        <label>
+                            <span style="transition-delay:0ms">B</span>
+                            <span style="transition-delay:50ms">i</span>
+                            <span style="transition-delay:100ms">o</span>
+                        </label>
+                    </div>
+                    <span class="d-flex justify-content-start">
+                        <span asp-validation-for="Bio" class="text-danger"></span>
+                    </span>
+                </div>
+            </div>
+            @* <div class="form-group mb-3">
+            <label for="images" class="font-bold">Cover Image:</label>
+            <input type="file" id="images" name="image" class="form-control-file" multiple />
+
+            </div> *@
+
+            <!-- Upload Images -->
+            <div class="w-38">
+                <label class="custum-file-upload" for="images">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                            <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+                            <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3
+            21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5
+            20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21
+            9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5
+            13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954
+            21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156
+            15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305
+            22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="file-text">
+                        <span class="text-white">Click to upload image</span>
+                    </div>
+                    <input type="file" name="image" id="images" multiple>
+                </label>
+            </div>
+        </div>
+
+        @* Email *@
+        <div class=" mt-4">
+            <div class="login-and-register-form-inputs">
+                <input asp-for="Email" required="" class="form-control w-100 shadow-sm" id="Email"
+                    placeholder="Enter Email">
+                <label asp-for="Email">
+                    <span style="transition-delay:0ms">E</span>
+                    <span style="transition-delay:50ms">n</span>
+                    <span style="transition-delay:100ms">t</span>
+                    <span style="transition-delay:150ms">e</span>
+                    <span style="transition-delay:200ms">r</span>
+                    <span style="transition-delay:250ms"></span>
+                    <span style="transition-delay:250ms">E</span>
+                    <span style="transition-delay:300ms">m</span>
+                    <span style="transition-delay:350ms">a</span>
+                    <span style="transition-delay:400ms">i</span>
+                    <span style="transition-delay:450ms">l</span>
+                </label>
+            </div>
+            <span class="d-flex justify-content-start">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </span>
+        </div>
+
+        @* Password *@
+        <div class=" mt-4">
+            <div class="login-and-register-form-inputs">
+                <input asp-for="Password" required="" class="form-control w-100 shadow-sm" id="Password"
+                    placeholder="Enter Password">
+                <label asp-for="Password">
+                    <span style="transition-delay:0ms">E</span>
+                    <span style="transition-delay:50ms">n</span>
+                    <span style="transition-delay:100ms">t</span>
+                    <span style="transition-delay:150ms">e</span>
+                    <span style="transition-delay:200ms">r</span>
+                    <span style="transition-delay:250ms"></span>
+                    <span style="transition-delay:250ms">P</span>
+                    <span style="transition-delay:300ms">a</span>
+                    <span style="transition-delay:350ms">s</span>
+                    <span style="transition-delay:400ms">s</span>
+                    <span style="transition-delay:450ms">w</span>
+                    <span style="transition-delay:500ms">o</span>
+                    <span style="transition-delay:550ms">r</span>
+                    <span style="transition-delay:600ms">d</span>
+                </label>
+            </div>
+            <span class="d-flex justify-content-start">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </span>
+        </div>
+
+        @* Confirm Password *@
+        <div class="mt-4">
+            <div class="login-and-register-form-inputs">
+                <input asp-for="PasswordConfirm" required="" class="form-control w-100 shadow-sm" id="PasswordConfirm"
+                    placeholder="Confirm Password">
+                <label asp-for="PasswordConfirm">
+                    <span style="transition-delay:0ms">C</span>
+                    <span style="transition-delay:50ms">o</span>
+                    <span style="transition-delay:100ms">n</span>
+                    <span style="transition-delay:150ms">f</span>
+                    <span style="transition-delay:200ms">i</span>
+                    <span style="transition-delay:250ms">r</span>
+                    <span style="transition-delay:300ms">m</span>
+                    <span style="transition-delay:350ms"></span>
+                    <span style="transition-delay:350ms">P</span>
+                    <span style="transition-delay:400ms">a</span>
+                    <span style="transition-delay:450ms">s</span>
+                    <span style="transition-delay:500ms">s</span>
+                    <span style="transition-delay:550ms">w</span>
+                    <span style="transition-delay:600ms">o</span>
+                    <span style="transition-delay:650ms">r</span>
+                    <span style="transition-delay:700ms">d</span>
+                </label>
+            </div>
+            <span class="d-flex justify-content-start">
+                <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+            </span>
+        </div>
+
+        @* Botton Register *@
+        <span class="d-flex justify-content-center mb-4">
+            <input type="submit" class="login-button" value="Sign Up">
+        </span>
+    </form>
+</div>

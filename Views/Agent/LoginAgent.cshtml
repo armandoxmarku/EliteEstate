@@ -1,0 +1,60 @@
+@model LoginAgent
+@{
+    ViewBag.Title = "Login";
+}
+<!-- _Login.cshtml -->
+
+<div class="row d-flex justify-content-center margin-top-150">
+    <form asp-action="LoginAgentForm" class="col-5 glass-effect-login" method="post">
+        @* Login Email *@
+            <div class=" mt-4">
+                <div class="login-and-register-form-inputs">
+                    <input asp-for="LoginEmail" placeholder="Email" required="Email is Required" class="form-control w-100 shadow-sm"
+                        id="LoginEmail">
+                    <label>
+                        <span style="transition-delay:0ms">E</span>
+                        <span style="transition-delay:50ms">m</span>
+                        <span style="transition-delay:100ms">a</span>
+                        <span style="transition-delay:150ms">i</span>
+                        <span style="transition-delay:200ms">l</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-end">
+                    <span asp-validation-for="LoginEmail" class="text-danger"></span>
+                </span>
+            </div>
+
+            @* Login Password *@
+            <div class=" mt-4">
+                <div class="login-and-register-form-inputs">
+                    <input asp-for="LoginPassword" placeholder="Email"  required="Password is Required" class="form-control w-100 shadow-sm"
+                        id="LoginPassword">
+                    <label>
+                        <span style="transition-delay:0ms">P</span>
+                        <span style="transition-delay:50ms">a</span>
+                        <span style="transition-delay:100ms">s</span>
+                        <span style="transition-delay:150ms">s</span>
+                        <span style="transition-delay:200ms">w</span>
+                        <span style="transition-delay:250ms">o</span>
+                        <span style="transition-delay:300ms">r</span>
+                        <span style="transition-delay:350ms">d</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-end">
+                    <span asp-validation-for="LoginPassword" class="text-danger"></span>
+                </span>
+            </div>
+
+            @* Botton Login *@
+            <span class="d-flex justify-content-center">
+                <input type="submit" class="login-button " value="Login">
+            </span>
+
+                <span class="d-flex justify-content-center">
+             <a class="new-account-style mt-3" asp-area="" asp-controller="Agent" asp-action="RegisterAgent">Become an agent</a>
+        </span>
+            <span class="d-flex justify-content-center">
+            <a asp-action="Login" class="new-account-style mt-3" asp-controller="Home">Login as user</a>
+        </span>
+    </form>
+</div>

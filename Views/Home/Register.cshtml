@@ -1,0 +1,146 @@
+@model User
+<link rel="stylesheet" href="~/css/register.css">
+
+<div class="row d-flex justify-content-center margin-top-95">
+    <form asp-action="RegisterUser" class="glass-effect-login col-6" method="post">
+
+        <div class="d-flex justify-content-between">
+            @* First Name *@
+            <div class=" w-48">
+                <div class="login-and-register-form-inputs">
+                    <input asp-for="FirstName" required="" class="form-control w-100 shadow-sm" id="FirstName" placeholder="Enter First Name">
+                    <label>
+                        <span style="transition-delay:0ms">E</span>
+                        <span style="transition-delay:50ms">n</span>
+                        <span style="transition-delay:100ms">t</span>
+                        <span style="transition-delay:150ms">e</span>
+                        <span style="transition-delay:200ms">r</span>
+                        <span style="transition-delay:250ms"></span>
+                        <span style="transition-delay:250ms">F</span>
+                        <span style="transition-delay:300ms">i</span>
+                        <span style="transition-delay:350ms">r</span>
+                        <span style="transition-delay:400ms">s</span>
+                        <span style="transition-delay:450ms">t</span>
+                        <span style="transition-delay:500ms"></span>
+                        <span style="transition-delay:500ms">N</span>
+                        <span style="transition-delay:550ms">a</span>
+                        <span style="transition-delay:600ms">m</span>
+                        <span style="transition-delay:650ms">e</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-start">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </span>
+            </div>
+
+            @* Last Name *@
+            <div class=" w-48">
+                <div class="login-and-register-form-inputs">
+                    <input asp-for="LastName" required="" class="form-control w-100 shadow-sm" id="LastName" placeholder="Enter Last Name">
+                    <label>
+                        <span style="transition-delay:0ms">E</span>
+                        <span style="transition-delay:50ms">n</span>
+                        <span style="transition-delay:100ms">t</span>
+                        <span style="transition-delay:150ms">e</span>
+                        <span style="transition-delay:200ms">r</span>
+                        <span style="transition-delay:250ms"></span>
+                        <span style="transition-delay:250ms">L</span>
+                        <span style="transition-delay:300ms">a</span>
+                        <span style="transition-delay:350ms">s</span>
+                        <span style="transition-delay:400ms">t</span>
+                        <span style="transition-delay:450ms"></span>
+                        <span style="transition-delay:450ms">N</span>
+                        <span style="transition-delay:500ms">a</span>
+                        <span style="transition-delay:550ms">m</span>
+                        <span style="transition-delay:600ms">e</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-start">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </span>
+            </div>
+        </div>
+
+        @* Email *@
+        <div class=" mt-4">
+            <div class="login-and-register-form-inputs">
+                <input asp-for="Email" required="" class="form-control w-100 shadow-sm" id="Email" placeholder="Enter Email">
+                <label asp-for="Email">
+                    <span style="transition-delay:0ms">E</span>
+                    <span style="transition-delay:50ms">n</span>
+                    <span style="transition-delay:100ms">t</span>
+                    <span style="transition-delay:150ms">e</span>
+                    <span style="transition-delay:200ms">r</span>
+                    <span style="transition-delay:250ms"></span>
+                    <span style="transition-delay:250ms">E</span>
+                    <span style="transition-delay:300ms">m</span>
+                    <span style="transition-delay:350ms">a</span>
+                    <span style="transition-delay:400ms">i</span>
+                    <span style="transition-delay:450ms">l</span>
+                </label>
+            </div>
+            <span class="d-flex justify-content-start">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </span>
+        </div>
+
+        @* Password *@
+        <div class=" mt-4">
+            <div class="login-and-register-form-inputs">
+                <input asp-for="Password" required="" class="form-control w-100 shadow-sm" id="Password" placeholder="Enter Password">
+                <label asp-for="Password">
+                    <span style="transition-delay:0ms">E</span>
+                    <span style="transition-delay:50ms">n</span>
+                    <span style="transition-delay:100ms">t</span>
+                    <span style="transition-delay:150ms">e</span>
+                    <span style="transition-delay:200ms">r</span>
+                    <span style="transition-delay:250ms"></span>
+                    <span style="transition-delay:250ms">P</span>
+                    <span style="transition-delay:300ms">a</span>
+                    <span style="transition-delay:350ms">s</span>
+                    <span style="transition-delay:400ms">s</span>
+                    <span style="transition-delay:450ms">w</span>
+                    <span style="transition-delay:500ms">o</span>
+                    <span style="transition-delay:550ms">r</span>
+                    <span style="transition-delay:600ms">d</span>
+                </label>
+            </div>
+            <span class="d-flex justify-content-start">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </span>
+        </div>
+
+        @* Confirm Password *@
+        <div class="mt-4">
+            <div class="login-and-register-form-inputs">
+                <input asp-for="PasswordConfirm" required="" class="form-control w-100 shadow-sm" id="PasswordConfirm" placeholder="Confirm Password">
+                <label asp-for="PasswordConfirm">
+                    <span style="transition-delay:0ms">C</span>
+                    <span style="transition-delay:50ms">o</span>
+                    <span style="transition-delay:100ms">n</span>
+                    <span style="transition-delay:150ms">f</span>
+                    <span style="transition-delay:200ms">i</span>
+                    <span style="transition-delay:250ms">r</span>
+                    <span style="transition-delay:300ms">m</span>
+                    <span style="transition-delay:350ms"></span>
+                    <span style="transition-delay:350ms">P</span>
+                    <span style="transition-delay:400ms">a</span>
+                    <span style="transition-delay:450ms">s</span>
+                    <span style="transition-delay:500ms">s</span>
+                    <span style="transition-delay:550ms">w</span>
+                    <span style="transition-delay:600ms">o</span>
+                    <span style="transition-delay:650ms">r</span>
+                    <span style="transition-delay:700ms">d</span>
+                </label>
+            </div>
+            <span class="d-flex justify-content-start">
+                <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+            </span>
+        </div>
+
+        @* Botton Register *@
+        <span class="d-flex justify-content-center mb-4">
+            <input type="submit" class="login-button" value="Sign Up">
+        </span>
+    </form>
+</div>

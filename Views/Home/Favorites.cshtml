@@ -1,0 +1,66 @@
+@model List<Property>
+
+@{
+    ViewBag.Title = "Favorite Properties";
+}
+
+<h2>Favorite Properties</h2>
+
+@if (Model.Count == 0)
+{
+    <p>You have no favorite properties.</p>
+}
+else
+{
+    <div class="row mt-4">
+        <div class="property-container d-flex gap-4 flex-wrap">
+        @foreach (var property in Model)
+        {
+                <div class="property-card">
+                    @if (property.Images != null && property.Images.Any())
+                    {
+                            <a href="@Url.Action("Details", new { id = property.PropertyId })" class="property-card-button">
+                                <img src="@property.Images.First().ImagePath" alt="Property Image">
+                              
+                            </a>
+                        } else {
+                            <p>No images available</p>
+                        }
+                        
+                    <div class="property-details">
+                        @* <div class="d-flex justify-content-between padding-15"> *@
+                        <div class="d-flex justify-content-between">
+                            @* <p class="property-location">@property.Category.Name</p> *@
+                        </div>
+
+                        <h4 class="property-title font-bold mt-2">
+                            <!-- Link to property details page -->
+                            <a href="@Url.Action("Details", new { id = property.PropertyId })" class="property-link animate-underline">@property.PropertyName</a>
+                        </h4>
+
+                        <div class="location-container">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p class="location">@property.Location</p>
+                        </div>
+                            @* <p class="property-price font-bold text-orangered">$@property.Price</p> *@
+                        @* </div> *@
+                        @* <div class="description-wrapper"> *@
+                        <p class="property-description">@property.Description</p>
+                        @* </div> *@
+                        <div class="d-flex justify-content-center align-items-center gap-3">
+                            <p><i class="fas fa-th-large fs-20"></i>@property.Rooms</p>
+                            <p><i class="fa-solid fa-bed fs-20"></i>@property.Bedrooms</p>
+                            <p><i class="fa-solid fa-shower fs-20"></i>@property.Bathrooms</p>
+                            <p><i class="fas fa-vector-square fs-20"></i>@property.Squaremetres</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="property-price font-bold text-orangered">$@property.Price</p>
+                             <a asp-action="AddToFavorite" asp-route-id="@property.PropertyId"class="favorite-button"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                        @* <a href="@Url.Action("Details", new { id = property.PropertyId })" class="property-link">View Details</a> *@
+                    </div>
+                </div>
+        }
+        </div>
+    </div>
+}

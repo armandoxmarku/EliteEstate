@@ -1,0 +1,297 @@
+@model Property
+
+@{
+    ViewData["Title"] = "Edit Property";
+}
+
+
+<div class="row d-flex justify-content-center margin-to-125">
+    <form class="glass-effect-login col-8" asp-action="UpdateProperty" asp-route-id="@Model.PropertyId" enctype="multipart/form-data">
+
+        <div class="d-flex justify-content-between">
+            <div class="w-55">
+                
+
+                <div>
+                    <div class="login-and-register-form-inputs">
+                        <input asp-for="PropertyName" required class="form-control w-100 shadow-sm" id="PropertyName" placeholder="Property Name">
+                        <label>
+                            <span style="transition-delay:0ms">P</span>
+                            <span style="transition-delay:50ms">r</span>
+                            <span style="transition-delay:100ms">o</span>
+                            <span style="transition-delay:150ms">p</span>
+                            <span style="transition-delay:200ms">e</span>
+                            <span style="transition-delay:250ms">r</span>
+                            <span style="transition-delay:300ms">t</span>
+                            <span style="transition-delay:350ms">y</span>
+                            <span style="transition-delay:400ms"></span>
+                            <span style="transition-delay:400ms">N</span>
+                            <span style="transition-delay:450ms">a</span>
+                            <span style="transition-delay:500ms">m</span>
+                            <span style="transition-delay:550ms">e</span>
+                        </label>
+                    </div>
+                    <span class="d-flex justify-content-start">
+                        <span asp-validation-for="PropertyName" class="text-danger"></span>
+                    </span>
+                </div>
+
+                <!-- Location -->
+                <div>
+                    <div class="login-and-register-form-inputs">
+                        <input asp-for="Location" required class="form-control w-100 shadow-sm" id="Location" placeholder="Location">
+                        <label>
+                            <span style="transition-delay:0ms">L</span>
+                            <span style="transition-delay:50ms">o</span>
+                            <span style="transition-delay:100ms">c</span>
+                            <span style="transition-delay:150ms">a</span>
+                            <span style="transition-delay:200ms">t</span>
+                            <span style="transition-delay:250ms">i</span>
+                            <span style="transition-delay:300ms">o</span>
+                            <span style="transition-delay:350ms">n</span>
+                        </label>
+                    </div>
+                    <span class="d-flex justify-content-start">
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </span>
+                </div>
+
+                <!-- Price -->
+                <div>
+                    <div class="login-and-register-form-inputs">
+                        <input asp-for="Price" required class="form-control w-100 shadow-sm" id="Price" placeholder="Price">
+                        <label>
+                            <span style="transition-delay:0ms">P</span>
+                            <span style="transition-delay:50ms">r</span>
+                            <span style="transition-delay:100ms">i</span>
+                            <span style="transition-delay:150ms">c</span>
+                            <span style="transition-delay:200ms">e</span>
+                        </label>
+                    </div>
+                    <span class="d-flex justify-content-start">
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Upload Images -->
+            <div class="form-group">
+                <label for="images">Upload Images</label>
+                <input type="file" name="images" id="images" class="form-control-file" multiple>
+            </div>
+            @* <div class="w-38">
+                <label class="custum-file-upload" for="images">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                            <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+                            <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="file-text">
+                        <span class="text-white">Click to upload image</span>
+                    </div>
+                    <input type="file" name="images" id="images" multiple>
+                </label>
+            </div> *@
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <!-- Category -->
+            <div class="w-48">
+                <div class="Property-form-selects">
+                    <select class="form-control w-100 shadow-sm" id="CategoryId" name="CategoryId" asp-for="CategoryId" required>
+                        <option value="" disabled selected hidden></option>
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <option value="@category.CategoryId">@category.Name</option>
+                        }
+                    </select>
+                    <label for="CategoryId">
+                        <span style="transition-delay:0ms">C</span>
+                        <span style="transition-delay:50ms">a</span>
+                        <span style="transition-delay:100ms">t</span>
+                        <span style="transition-delay:150ms">e</span>
+                        <span style="transition-delay:200ms">g</span>
+                        <span style="transition-delay:250ms">o</span>
+                        <span style="transition-delay:300ms">r</span>
+                        <span style="transition-delay:350ms">i</span>
+                        <span style="transition-delay:400ms">e</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-start">
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </span>
+            </div>
+            <!-- Property Type -->
+            <div class="w-48">
+                <div class="Property-form-selects">
+                    <select class="form-control w-100 shadow-sm" id="PropertyTypeId" name="PropertyTypeId" asp-for="PropertyTypeId" required>
+                        <option value="" disabled selected hidden></option>
+                        @foreach (var type in ViewBag.PropertyType)
+                        {
+                            <option value="@type.PropertyTypeId">@type.TypeOfproperty</option>
+                        }
+                    </select>
+                    <label for="PropertyTypeId">
+                        <span style="transition-delay:0ms">P</span>
+                        <span style="transition-delay:50ms">r</span>
+                        <span style="transition-delay:100ms">o</span>
+                        <span style="transition-delay:150ms">p</span>
+                        <span style="transition-delay:200ms">e</span>
+                        <span style="transition-delay:250ms">r</span>
+                        <span style="transition-delay:300ms">t</span>
+                        <span style="transition-delay:350ms">y</span>
+                        <span style="transition-delay:400ms"></span>
+                        <span style="transition-delay:400ms">T</span>
+                        <span style="transition-delay:450ms">y</span>
+                        <span style="transition-delay:500ms">p</span>
+                        <span style="transition-delay:550ms">e</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-start">
+                    <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
+                </span>
+            </div>
+        </div>
+
+        <!-- Checkboxes -->
+        <div class="d-flex justify-content-between mt-40px">
+            <!-- Garage -->
+            <div>
+                <label asp-for="Garages" class="cyberpunk-checkbox-label">
+                    <input asp-for="Garages" type="checkbox" class="cyberpunk-checkbox">
+                    Garage</label>
+            </div>
+            <!-- Pool -->
+            <div>
+                <label asp-for="Pool" class="cyberpunk-checkbox-label">
+                    <input asp-for="Pool" type="checkbox" class="cyberpunk-checkbox">
+                    Pool</label>
+            </div>
+            <!-- Garden -->
+            <div>
+                <label asp-for="Garden" class="cyberpunk-checkbox-label">
+                    <input asp-for="Garden" type="checkbox" class="cyberpunk-checkbox">
+                    Garden</label>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <!-- Squaremetres -->
+            <div class="w-20">
+                <div class="login-and-register-form-inputs">
+                    <input asp-for="Squaremetres" required class="form-control w-100 shadow-sm" id="Squaremetres" placeholder="Squaremetres">
+                    <label>
+                        <span style="transition-delay:0ms">S</span>
+                        <span style="transition-delay:50ms">q</span>
+                        <span style="transition-delay:100ms">u</span>
+                        <span style="transition-delay:150ms">a</span>
+                        <span style="transition-delay:200ms">r</span>
+                        <span style="transition-delay:250ms">e</span>
+                        <span style="transition-delay:300ms">m</span>
+                        <span style="transition-delay:350ms">e</span>
+                        <span style="transition-delay:400ms">t</span>
+                        <span style="transition-delay:450ms">r</span>
+                        <span style="transition-delay:500ms">e</span>
+                        <span style="transition-delay:550ms">s</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-start">
+                    <span asp-validation-for="Squaremetres" class="text-danger"></span>
+                </span>
+            </div>
+            <!-- Bedrooms -->
+            <div class="w-20">
+                <div class="login-and-register-form-inputs">
+                    <input asp-for="Bedrooms" required class="form-control w-100 shadow-sm" id="Bedrooms" placeholder="Bedrooms">
+                    <label>
+                        <span style="transition-delay:0ms">B</span>
+                        <span style="transition-delay:50ms">a</span>
+                        <span style="transition-delay:100ms">d</span>
+                        <span style="transition-delay:150ms">r</span>
+                        <span style="transition-delay:200ms">o</span>
+                        <span style="transition-delay:250ms">o</span>
+                        <span style="transition-delay:300ms">m</span>
+                        <span style="transition-delay:350ms">s</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-start">
+                    <span asp-validation-for="Bedrooms" class="text-danger"></span>
+                </span>
+            </div>
+
+            <!-- Bathrooms -->
+            <div class="w-20">
+                <div class="login-and-register-form-inputs">
+                    <input asp-for="Bathrooms" required class="form-control w-100 shadow-sm" id="Bathrooms" placeholder="Bathrooms">
+                    <label>
+                        <span style="transition-delay:0ms">B</span>
+                        <span style="transition-delay:50ms">a</span>
+                        <span style="transition-delay:100ms">t</span>
+                        <span style="transition-delay:150ms">h</span>
+                        <span style="transition-delay:200ms">r</span>
+                        <span style="transition-delay:250ms">o</span>
+                        <span style="transition-delay:300ms">o</span>
+                        <span style="transition-delay:350ms">m</span>
+                        <span style="transition-delay:400ms">s</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-start">
+                    <span asp-validation-for="Bathrooms" class="text-danger"></span>
+                </span>
+            </div>
+
+            <!-- Rooms -->
+            <div class="w-20">
+                <div class="login-and-register-form-inputs">
+                    <input asp-for="Rooms" required class="form-control w-100 shadow-sm" id="Rooms" placeholder="Rooms">
+                    <label>
+                        <span style="transition-delay:0ms">A</span>
+                        <span style="transition-delay:50ms">l</span>
+                        <span style="transition-delay:100ms">l</span>
+                        <span style="transition-delay:150ms"></span>
+                        <span style="transition-delay:150ms">R</span>
+                        <span style="transition-delay:200ms">o</span>
+                        <span style="transition-delay:250ms">o</span>
+                        <span style="transition-delay:300ms">m</span>
+                        <span style="transition-delay:350ms">s</span>
+                    </label>
+                </div>
+                <span class="d-flex justify-content-start">
+                    <span asp-validation-for="Rooms" class="text-danger"></span>
+                </span>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mt-40px">
+            <div class="textarea-style">
+                <textarea asp-for="Description" placeholder="Description" required class="form-control w-100 shadow-sm" id="Description"></textarea>
+                <label>
+                    <span style="transition-delay:0ms">D</span>
+                    <span style="transition-delay:50ms">e</span>
+                    <span style="transition-delay:100ms">s</span>
+                    <span style="transition-delay:150ms">c</span>
+                    <span style="transition-delay:200ms">r</span>
+                    <span style="transition-delay:250ms">i</span>
+                    <span style="transition-delay:300ms">p</span>
+                    <span style="transition-delay:350ms">t</span>
+                    <span style="transition-delay:400ms">i</span>
+                    <span style="transition-delay:450ms">o</span>
+                    <span style="transition-delay:500ms">n</span>
+                </label>
+            </div>
+            <span class="d-flex justify-content-start">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </span>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-flex justify-content-center mt-4">
+            <input type="submit" value="Upload" class="login-button">
+        </div>
+    </form>
+</div>

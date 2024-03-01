@@ -1,0 +1,184 @@
+@model Property
+
+<div class="row d-flex details-container mt-3">
+    <div class="col-8">
+        @* <div class="gallery border border-2 border-dark">
+            @if (Model.Images != null && Model.Images.Any())
+            {
+                foreach (var image in Model.Images)
+                {
+                    <img src="@image.ImagePath" alt="Property Image" class="property-image">
+                }
+            } else {
+                <p>No images available for this property.</p>
+            }
+        </div> *@
+
+        <div class="gallery mt-3">
+            <div class="carousel-container p-4">
+                <div class="carousel-images">
+                    @if (Model.Images != null && Model.Images.Any())
+                    {
+                        foreach (var image in Model.Images)
+                        {
+                            <img src="@image.ImagePath" alt="Property Image" class="property-image">
+                        }
+                    } else {
+                        <p>No images available for this property.</p>
+                    }
+                </div>
+                <div class="thumbnail-container">
+                    @if (Model.Images != null && Model.Images.Any())
+                    {
+                        foreach (var image in Model.Images)
+                        {
+                            <img src="@image.ImagePath" alt="Thumbnail" class="thumbnail">
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="property-details p-4 mt-3 mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>@Model.PropertyName</h1>
+                @* @if (ViewBag.AgentId != null && ViewBag.AgentId == Model.AgentId)
+                {
+                    <a class="edit-property-button font-bold" asp-area="" asp-controller="Agent" asp-action="EditProperty" asp-route-id="@Model.PropertyId">Edit Property</a>
+                } *@
+            </div>
+                @* <h3>Property Information</h3> *@
+            <div>
+                <p class="font-bold margin-0-important">Description:</p>
+                <p class="text-orangered">@Model.Description</p>
+
+            </div>
+
+            <div class="d-flex gap-5">
+                <div>
+                    <p class="font-bold margin-0-important">Address:</p>
+                    <p class="text-orangered">@Model.Location</p>
+
+                    <p class="font-bold margin-0-important">Property Type:</p>
+                    <p class="text-orangered">@Model.PropertyType.TypeOfproperty</p>
+
+                    <p class="font-bold margin-0-important">Price:</p>
+                    <p class="text-orangered">@Model.Price</p>
+                </div>
+                
+                <div>
+                    <p class="font-bold margin-0-important">Squaremeters:</p>
+                    <p class="text-orangered">@Model.Squaremetres</p>
+
+                    <p class="font-bold margin-0-important">Bedrooms:</p>
+                    <p class="text-orangered">@Model.Bedrooms</p>
+                    
+                    <p class="font-bold margin-0-important">Bathrooms:</p>
+                    <p class="text-orangered">@Model.Bathrooms</p>
+                </div>
+                
+                <div>
+                    @if(Model.Garden != null && Model.Garden == true)
+                    {
+                        <p class="font-bold margin-0-important">Garden:</p>
+                        <p class="text-orangered">Yes</p>
+                    }
+                    else
+                    {
+                        <p class="font-bold margin-0-important">Garden:</p>
+                        <p class="text-orangered">No</p>
+                    }
+                    @if(Model.Garages != null && Model.Garages == true)
+                    {
+                        <p class="font-bold margin-0-important">Garages:</p>
+                        <p class="text-orangered">Yes</p>
+                    }
+                    else
+                    {
+                        <p class="font-bold margin-0-important">Garages:</p>
+                        <p class="text-orangered">No</p>
+                    }
+                    @if(Model.Pool != null && Model.Pool == true)
+                    {
+                        <p class="font-bold margin-0-important">Swimming Pool:</p>
+                        <p class="text-orangered">Yes</p>
+                    }
+                    else
+                    {
+                        <p class="font-bold margin-0-important">Swimming Pool:</p>
+                        <p class="text-orangered">No</p>
+                    }
+                </div>
+            </div>
+            @* <p class="font-bold margin-0-important">Listed By:</p>
+            <p class="text-orangered">@Model.Agent.Name @Model.Agent.LastName</p> *@
+        </div>
+        
+        @* <a asp-area="" asp-controller="Agent" asp-action="EditProperty" asp-route-id="@Model.PropertyId">Edit Property</a> *@
+    </div>
+    <div class="col-4 d-flex flex-column justify-content-between mt-3">
+        <div class="agent-published p-4">
+            @if (Model.Images != null && Model.Images.Any())
+                    {
+                        if (Model.Images != null && Model.Images.Any())
+                        {
+                            <a href="@Url.Action("AgentProfile", new { id = Model.AgentId })">
+                                <img src="@Model.Agent.ProfilePicture"  class="details-agent-image" alt="Property Image">
+                            </a>
+                        } else {
+                            <p>No images available</p>
+                        }
+                    }
+            <h3 class="font-bold text-center">@Model.Agent.Name @Model.Agent.LastName</h3>
+            <div class="d-flex justify-content-evenly">
+                @* <p class="font-bold margin-0-important">Name: <span class="text-orangered">@Model.Agent.Name @Model.Agent.LastName</span></p> *@
+                @* @if(ViewBag.UserId != null || ViewBag.AgentId == null)
+                {
+                    <div>
+                        <p class="font-bold margin-0-important">Email: [ <span class="text-orangered">Login To View</span> ]</p>
+                        <p class="font-bold margin-0-important">Phone: [ <span class="text-orangered">Login To View</span> ]</p>
+                    </div>
+                } else if (ViewBag.UserId == null && ViewBag.AgentId != null) {
+                    <div>
+                        <p class="font-bold margin-0-important">Email: [ <span class="text-orangered">Login To View</span> ]</p>
+                        <p class="font-bold margin-0-important">Phone: [ <span class="text-orangered">Login To View</span> ]</p>
+                    </div>
+                } else {
+                    <p class="font-bold margin-0-important">Email: <a class="email-button" href="mailto:@Model.Agent.Email">@Model.Agent.Email</a></p>
+                    <p class="font-bold margin-0-important">Phone: <span class="text-orangered">@Model.Agent.Phone</span></p>
+                } *@
+                <p class="font-bold margin-0-important">Email: <a class="email-button" href="mailto:@Model.Agent.Email">@Model.Agent.Email</a></p>
+                <p class="font-bold margin-0-important">Phone: <span class="text-orangered">@Model.Agent.Phone</span></p>
+            </div>
+            <a href="@Url.Action("AgentProfile", new { id = Model.AgentId })" class="agent-profile-button font-bold">Agent Profile</a>
+        </div>
+        @if (Model.Category != null && Model.Category.Name == "Sale") {
+
+        <div class="mortage-calculator p-4 mt-3 mb-3">
+            <h3 class="text-orangered">Mortgage Calculator</h3>
+
+            <p class="font-bold margin-0-important">Property Price:</p>
+            <p class="text-orangered">@Model.Price</p>
+
+            <div class="d-flex flex-column gap-1 mortage-inputs">
+                <label for="principal" class="font-bold">Principal Amount:</label>
+                <input type="text" id="principal" value="@Model.Price" />
+
+                <label for="interestRate" class="font-bold mt-2">Annual Interest Rate (%):</label>
+                <input type="text" id="interestRate" />
+
+                <label for="loanTerm" class="font-bold mt-2">Loan Term (months):</label>
+                <input type="text" id="loanTerm" />
+
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="calculate-button font-bold mt-2" onclick="calculateMortgage()">Calculate</button>
+                </div>
+            </div>
+            
+            <div class="mt-3 mb-2" id="monthlyPayment"></div>
+            <p class="margin-0-important">This value is an approximate calculation. For more information, please contact the property consultant.</p>
+        </div>
+        }
+    </div>
+</div>

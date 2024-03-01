@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EliteEstate</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/RealEstate.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/fb4621f541.js" crossorigin="anonymous"></script>
+</head>
+@{
+    var agentId = Context.Session.GetInt32("AgentId");
+}
+<body class="@((Context.Request.Path == "/" || Context.Request.Path == "/Agent" || Context.Request.Path == "/Home" || Context.Request.Path == "/Auth" || Context.Request.Path == "/Login"  || Context.Request.Path == "/LoginUserForm" || Context.Request.Path == "/Register" || Context.Request.Path == "/RegisterUser" || Context.Request.Path == "/LoginAgent" || Context.Request.Path == "/LoginAgentForm" || Context.Request.Path == "/RegisterAgent" || Context.Request.Path == "/RegisterAgentForm" || Context.Request.Path == "/Agent/CreateProperty"  || Context.Request.Path == "/EditAgentProfile/" + agentId)  ? "HomePage-Background" : "")">
+<header>
+        <nav class="mb-3 glass-effect-header d-flex ">
+            
+                <div class="d-flex">
+                    <a class="navbar-brand text-black font-bold" asp-area="" asp-controller="" asp-action="Index">Elite<span class="text-orangered">Estate</span></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <div class="d-flex justify-content-end align-items-center gap-0-40">
+                            @if(Context.Session.GetInt32("AgentId") != null){
+                                <li class="nav-item">
+                                    <a class="nav-link explore-properties-button font-bold" asp-area="" asp-controller="Agent" asp-action="AgentProfile" asp-route-id="@ViewBag.AgentId">My Profile</a>
+                                </li>
+                            }
+
+
+                            @if(Context.Session.GetInt32("AgentId") != null){
+                                <li class="nav-item">
+                                    <a class="nav-link explore-properties-button font-bold" asp-area="" asp-controller="Agent" asp-action="CreateProperty">Create Property</a>
+                                </li>
+                            }
+
+                            @if(Context.Session.GetInt32("UserId") != null){
+                                <li class="nav-item">
+                                    <a class="nav-link explore-properties-button font-bold" asp-area="" asp-controller="Home" asp-action="Favorites">My Favorites</a>
+                                </li>
+                            }
+
+                            <li class="nav-item">
+                                <a class="nav-link explore-properties-button font-bold" asp-area="" asp-controller="Agent" asp-action="ExploreProperties">Explore Properties</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                @if(Context.Session.GetInt32("UserId") != null || Context.Session.GetInt32("AgentId") != null)
+                                {
+                                    <a class="Btn" asp-area="" asp-action="Logout">
+                                        <div class="sign">
+                                            <svg viewBox="0 0 512 512">
+                                                <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                                            </svg>
+                                        </div>
+  
+                                        <div class="text text-center">Logout</div>
+                                    </a>
+                                }else{
+                                    <a class="Btn" asp-area="" asp-controller="Home" asp-action="Login">
+                                        <div class="sign">
+                                            <svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path></svg>
+                                        </div>
+  
+                                        <div class="text text-center">Login</div>
+                                    </a>
+                                }
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+

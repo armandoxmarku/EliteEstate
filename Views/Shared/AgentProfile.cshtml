@@ -1,0 +1,132 @@
+@model Agent
+
+@* <h2>Agent Profile</h2> *@
+
+
+<div class="row d-flex gap-3">
+    <div class="agent-information d-flex gap-5 p-4">
+        <div class="text-center">
+            <a href="@Url.Action("AgentProfile", new { id = Model.AgentId })">
+                <img src="@Model.ProfilePicture"  class="details-agent-image" alt="Property Image">
+            </a>
+            @if (Context.Session.GetInt32("AgentId") != null && Context.Session.GetInt32("AgentId") == Model.AgentId) {
+                <form asp-action="UploadProfilePicture" class="text-center" method="post" enctype="multipart/form-data">
+                    <div class="row justify-content-center">
+                        <label for="images" class="flex items-center cursor-pointer label-profile-picture col-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11.8125" stroke="#fffffff" stroke-width="2"></path>
+                            <path d="M17 15V18M17 21V18M17 18H14M17 18H20" stroke="#fffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <span class="ml-2">Change Profile Picture</span>
+                        </label>
+                        <div class=" col-6">
+                            <button type="submit" class="login-button">Upload</button>
+
+                        </div>
+                    </div>
+                    
+                <input id="images" type="file" name="images" class="opacity-0">
+                </form>
+            }
+                    
+        </div>
+
+        <div class="width-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex justify-content-between align-items-center width-100">
+                    <h3 class="font-bold">@Model.Name @Model.LastName</h3>
+                    @if (Context.Session.GetInt32("AgentId") != null && Context.Session.GetInt32("AgentId") == Model.AgentId)
+                    {
+                        <a class="edit-profile-button" asp-area="" asp-controller="Agent" asp-action="EditAgentProfile" asp-route-id="@Model.AgentId">Edit Profile</a>
+                    }
+                    @* <a class="edit-profile-button" asp-area="" asp-controller="Agent" asp-action="EditAgentProfile" asp-route-id="@Model.AgentId">Edit Profile</a> *@
+
+                </div>
+                @* @if (ViewBag.AgentId != null && ViewBag.AgentId == Model.AgentId)
+                {
+                    <a class="edit-profile-button" asp-area="" asp-controller="Agent" asp-action="EditAgentProfile" asp-route-id="@Model.AgentId">Edit Profile</a>
+                } *@
+            </div>
+
+            <div class="d-flex mb-2 gap-4 mb-3">
+                <p class="margin-0-important"><span class="font-bold">Email:</span> <span class="text-orangered"><a class="email-button" href="mailto:@Model.Email">@Model.Email</a></span></p>
+                <p class="margin-0-important"><span class="font-bold">Phone:</span> <span class="text-orangered">@Model.Phone</span></p>
+                <p class="margin-0-important"><span class="font-bold">Address:</span> <span class="text-orangered">@Model.Address</span></p>
+                @* <p class="margin-0-important">Phone: @Model.Phone</p>
+                <p class="margin-0-important">Address: @Model.Address</p> *@
+            </div>
+
+            @* @if (!string.IsNullOrEmpty(Model.ProfilePicture))
+            {
+                <img src="@Model.ProfilePicture" alt="Profile Picture" />
+            } *@
+
+            <p class="font-bold margin-0-important">Bio:</p>
+            <p class="text-orangered margin-0-important">@Model.Bio</p>
+
+            @* <p class="margin-0-important">Properties:</p>
+            <ul>
+                @foreach (var property in Model.Properties)
+                {
+                    <li>@property.PropertyName - @property.Description</li>
+                }
+            </ul> *@
+        </div>
+    </div>
+
+    <div class="agent-published-properties p-4">
+        <h3 class="mb-4">@Model.Name @Model.LastName's Properties</h3>
+        <div class="property-container d-flex gap-4 flex-wrap">
+        @foreach (var property in Model.Properties)
+        {
+                <div class="property-card">
+                    @if (property.Images != null && property.Images.Any())
+                    {
+                            <a href="@Url.Action("Details", new { id = property.PropertyId })" class="property-card-button">
+                                <img src="@property.Images.First().ImagePath" alt="Property Image">
+                              
+                            </a>
+                        } else {
+                            <p>No images available</p>
+                        }
+                        
+                    <div class="property-details">
+                        @* <div class="d-flex justify-content-between padding-15"> *@
+                        <div class="d-flex justify-content-between">
+                            <p class="property-location">@property.Category.Name</p>
+                        </div>
+
+                        <h4 class="property-title font-bold">
+                            <!-- Link to property details page -->
+                            <a href="@Url.Action("Details", new { id = property.PropertyId })" class="property-link animate-underline">@property.PropertyName</a>
+                        </h4>
+
+                        <div class="location-container">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p class="location">@property.Location</p>
+                        </div>
+                            @* <p class="property-price font-bold text-orangered">$@property.Price</p> *@
+                        @* </div> *@
+                        @* <div class="description-wrapper"> *@
+                        <p class="property-description">@property.Description</p>
+                        @* </div> *@
+                        <div class="d-flex justify-content-center align-items-center gap-3">
+                            <p><i class="fas fa-th-large fs-20"></i> @property.Rooms</p>
+                            <p><i class="fa-solid fa-bed fs-20"></i> @property.Bedrooms</p>
+                            <p><i class="fa-solid fa-shower fs-20"></i> @property.Bathrooms</p>
+                            <p><i class="fas fa-vector-square fs-20"></i> @property.Squaremetres</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="property-price font-bold text-orangered">$@property.Price</p>
+                            @if(Context.Session.GetInt32("UserId") != null){
+
+                                <a asp-action="AddToFavorite" asp-controller="Home"asp-route-id="@property.PropertyId" class="favorite-button"><i class="fa-regular fa-heart"></i></a>
+                            }
+                        </div>
+                        @* <a href="@Url.Action("Details", new { id = property.PropertyId })" class="property-link">View Details</a> *@
+                    </div>
+                </div>
+        }
+        </div>
+    </div>
+</div>
