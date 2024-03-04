@@ -156,12 +156,8 @@ public IActionResult ExploreProperties(int? categoryId, int? propertyTypeId, str
             .Include(a => a.Agent)
             .FirstOrDefault(p => p.PropertyId == id);
 
-        if (property == null)
-        {
-            return NotFound(); // Return a 404 Not Found if property with the given ID is not found
-        }
 
-        return View("Details", property); // Pass the retrieved property to the view for display
+        return View("Details", property); 
     }
     [HttpGet("AddToFavorite/{id}")]
     public IActionResult AddToFavorite(int id)

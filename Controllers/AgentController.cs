@@ -176,7 +176,7 @@ public class AgentController : Controller
     [HttpGet("DeleteProperty/{id}")]
     public IActionResult DeleteProperty(int id)
     {
-        Property property = _context.Properties.FirstOrDefault(p => p.PropertyId == id);
+        Property property = _context.Properties.Include(u=>u.Images).FirstOrDefault(p => p.PropertyId == id);
         if (property == null)
         {
             return NotFound();
@@ -185,62 +185,80 @@ public class AgentController : Controller
         _context.SaveChanges();
         return RedirectToAction("Index");
     }
-    // [HttpGet("EditProperty/{id}")]
-    // public IActionResult EditProperty(int id)
-    // {
-    //     ViewBag.AgentId = HttpContext.Session.GetInt32("AgentId");
-    //     Property property = _context.Properties.FirstOrDefault(p => p.PropertyId == id);
-    //     if (property == null)
-    //     {
-    //         return NotFound();
-    //     }
-    //     ViewBag.PropertyType = _context.PropertyTypes.ToList();
-    //     ViewBag.Categories = _context.Categories.ToList();
-    //     return View(property);
-    // }
+    [HttpGet("EditProperty/{id}")]
+    public IActionResult EditProperty(int id)
+    {
+        ViewBag.AgentId = HttpContext.Session.GetInt32("AgentId");
+        Property property = _context.Properties.Include(i=>i.Images).FirstOrDefault(p => p.PropertyId == id);
+        if (property == null)
+        {
+            return NotFound();
+        }
+        ViewBag.PropertyType = _context.PropertyTypes.ToList();
+        ViewBag.Categories = _context.Categories.ToList();
+        return View(property);
+    }
+[HttpPost("UpdateProperty/{id}")]
+public async Task<IActionResult> UpdateProperty(int id, Property property, List<IFormFile> images)
+{
+    if (ModelState.IsValid)
+    {
+        var propertyToUpdate = await _context.Properties
+            .Include(p => p.Images) // Include images for updating
+            .FirstOrDefaultAsync(p => p.PropertyId == id);
 
-    // [HttpPost("UpdateProperty/{id}")]
-    // public IActionResult UpdateProperty(int id, Property property)
-    // {
-    //     if (ModelState.IsValid)
-    //     {
-    //         Property propertyToUpdate = _context.Properties.FirstOrDefault(p => p.PropertyId == id);
-    //         if (propertyToUpdate == null)
-    //         {
-    //             return NotFound();
-    //         }
-    //         propertyToUpdate.Images = property.Images;
-    //         propertyToUpdate.PropertyName = property.PropertyName;
-    //         propertyToUpdate.Description = property.Description;
-    //         propertyToUpdate.Location = property.Location;
-    //         propertyToUpdate.Price = property.Price;
-    //         propertyToUpdate.Bedrooms = property.Bedrooms;
-    //         propertyToUpdate.Bathrooms = property.Bathrooms;
-    //         propertyToUpdate.Squaremetres = property.Squaremetres;
-    //         propertyToUpdate.Rooms = property.Rooms;
-    //         propertyToUpdate.Garages = property.Garages;
-    //         propertyToUpdate.Garden = property.Garden;
-    //         propertyToUpdate.Pool = property.Pool;
-    //         propertyToUpdate.CategoryId = property.CategoryId;
-    //         propertyToUpdate.PropertyTypeId = property.PropertyTypeId;
-    //         _context.SaveChanges();
-    //         return RedirectToAction("Details", new { id });
-    //     }
-    //     return View("EditProperty", property);
-    // }
+        if (propertyToUpdate == null)
+        {
+            return NotFound();
+        }
+
+        // Update properties
+        propertyToUpdate.PropertyName = property.PropertyName;
+        propertyToUpdate.Description = property.Description;
+        propertyToUpdate.Location = property.Location;
+        propertyToUpdate.Price = property.Price;
+        propertyToUpdate.Bedrooms = property.Bedrooms;
+        propertyToUpdate.Bathrooms = property.Bathrooms;
+        propertyToUpdate.Squaremetres = property.Squaremetres;
+        propertyToUpdate.Rooms = property.Rooms;
+        propertyToUpdate.Garages = property.Garages;
+        propertyToUpdate.Pool = property.Pool;
+        propertyToUpdate.Garden = property.Garden;
+        propertyToUpdate.CategoryId = property.CategoryId;
+        propertyToUpdate.PropertyTypeId = property.PropertyTypeId;
+
+        // Update images
+        foreach (var image in images)
+        {
+            if (image != null && image.Length > 0)
+            {
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+
+                var imageEntity = new Image { ImagePath = "/images/" + fileName };
+                propertyToUpdate.Images.Add(imageEntity); // Add new image to property
+            }
+        }
+
+       
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Details", new { id });
+    }
+
+    return View("EditProperty", property);
+}
+
 
     [HttpGet("EditAgentProfile/{id}")]
     public IActionResult EditAgentProfile(int id)
     {
         ViewBag.AgentId = HttpContext.Session.GetInt32("AgentId");
         Agent agent = _context.Agents.FirstOrDefault(p => p.AgentId == id);
-        if (agent == null)
-        {
-            return NotFound();
-        }
-        // ViewBag.PropertyType = _context.PropertyTypes.ToList();
-        // ViewBag.Categories = _context.Categories.ToList();
-
         return View(agent);
     }
 

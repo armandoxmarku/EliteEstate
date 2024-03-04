@@ -112,10 +112,20 @@
                 </div>
             </div>
             @* <p class="font-bold margin-0-important">Listed By:</p>
+         
             <p class="text-orangered">@Model.Agent.Name @Model.Agent.LastName</p> *@
+        @if(Context.Session.GetInt32("AgentId")==@Model.AgentId){
+         <div class="row">
+        <div class="col-md-3">
+            <a class="nav-link explore-properties-button font-bold smaller-width" asp-area="" asp-controller="Agent" asp-action="DeleteProperty" asp-route-id="@Model.PropertyId">Delete Property</a>
         </div>
-        
-        @* <a asp-area="" asp-controller="Agent" asp-action="EditProperty" asp-route-id="@Model.PropertyId">Edit Property</a> *@
+        <div class="col-md-3">
+            <a class="nav-link explore-properties-button font-bold smaller-width" asp-area="" asp-controller="Agent" asp-action="EditProperty" asp-route-id="@Model.PropertyId">Edit Property</a>
+        </div>
+    </div>
+       
+            }
+        </div>
     </div>
     <div class="col-4 d-flex flex-column justify-content-between mt-3">
         <div class="agent-published p-4">
