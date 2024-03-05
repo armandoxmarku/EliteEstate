@@ -28,6 +28,5 @@ public class Property
     public bool Pool { get; set; }
     public bool Garden { get; set; } //checkbox
     public List<Image>? Images { get; set; }
-    public List<Favorite>? UserFavorites {get;set;}= new List<Favorite>();
     public DateTime CreatedAt { get; set; }
 }

@@ -47,7 +47,9 @@
                             <p class="property-price font-bold text-orangered">$@property.Price</p>
                             @if(Context.Session.GetInt32("UserId") != null){
 
-                                <a asp-action="AddToFavorite" asp-controller="Home"asp-route-id="@property.PropertyId" class="favorite-button"><i class="fa-regular fa-heart"></i></a>
+<a id="favoriteButton" asp-action="AddToFavorite" asp-controller="Home" asp-route-id="@property.PropertyId" class="favorite-button" onclick="toggleFavorite(this)">
+    <i class="fa-regular fa-heart"></i>
+</a>
                             }
                             
                         </div>
@@ -75,7 +77,7 @@
                     }
                 </select>
 
-                <!-- Location filter -->
+                
                 <select name="location" class="select-filter-options" id="location-filter">
                     <option value="">All Locations</option>
                     @foreach (var location in ViewBag.Locations)
@@ -96,19 +98,12 @@
         </div>
     </div>
 
-    @* <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let favoriteButtons = document.querySelectorAll('.favorite-button');
-
-            favoriteButtons.forEach(button => {
-                button.addEventListener('click', (event) => {
-                    event.preventDefault();
-
-                    let heartIcon = button.querySelector('i');
-                    heartIcon.classList.toggle('fa-regular');
-                    heartIcon.classList.toggle('fa-solid');
-                });
-            });
-        });
-    </script> *@
+    <script>
+        function toggleFavorite(button) {
+            if (button.classList.contains("favorite-button-active")) {
+                button.classList.remove("favorite-button-active");
+            } else {
+                button.classList.add("favorite-button-active");
+            }
+        }
 </div>

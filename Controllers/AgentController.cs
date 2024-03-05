@@ -406,14 +406,6 @@ public async Task<IActionResult> UpdateProperty(int id, Property property, List<
     }
 
 
-
-    // [SessionCheckAgent]
-    // public IActionResult Home()
-    // {
-    //     return View();
-    // }
-
-
     [HttpGet("Agent/Details/{id}")]
     public IActionResult Details(int id, double interestRate, int loanTerm)
     {

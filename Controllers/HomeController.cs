@@ -239,12 +239,7 @@ public IActionResult ExploreProperties(int? categoryId, int? propertyTypeId, str
         return View("Favorites", favoriteProperties);
     }
 
-    // public IActionResult Home()
-    // {
-    //     // ViewBag.UserId = HttpContext.Session.GetInt32("UserId");
-    //     // ViewBag.AgentId = HttpContext.Session.GetInt32("AgentId");
-    //     return View();
-    // }
+ 
 
     public IActionResult Index()
     {

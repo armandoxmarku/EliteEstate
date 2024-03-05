@@ -13,6 +13,8 @@ function calculateMortgage() {
 
     document.getElementById("monthlyPayment").innerText = "Monthly Payment: " + "$" + monthlyPayment.toFixed(2);
 }
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const propertyImages = document.querySelectorAll(".property-image");
     const thumbnails = document.querySelectorAll(".thumbnail");
