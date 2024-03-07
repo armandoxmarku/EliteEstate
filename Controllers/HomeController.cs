@@ -5,6 +5,7 @@ using EliteEstate.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
+using System.Linq;
 namespace EliteEstate.Controllers;
 public class SessionCheckAttribute : ActionFilterAttribute
 {

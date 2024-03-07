@@ -407,7 +407,7 @@ public async Task<IActionResult> UpdateProperty(int id, Property property, List<
 
 
     [HttpGet("Agent/Details/{id}")]
-    public IActionResult Details(int id, double interestRate, int loanTerm)
+    public IActionResult Details(int id )
     {
         ViewBag.AgentId = HttpContext.Session.GetInt32("AgentId");
         Property property = _context.Properties
